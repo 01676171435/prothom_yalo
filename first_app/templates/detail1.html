@@ -1,0 +1,78 @@
+{% extends 'base1.html' %}
+{% block content %}
+  <main class="container mt-3 mb-5">
+    <!-- featured news -->
+    <div class="row my-3">
+      <!-- Left -->
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <img src="/media/{{ news.image }}" class="card-img-top" alt="{{ news.Headline }}" />
+          <div class="card-body">
+            <h5 class="card-title">{{ news.Headline }}</h5>
+            <hr />
+            <p class="card-text">{{ news.Body }}</p>
+          </div>
+          <div class="card-footer">
+            In <a href="/category/{{ news.category.id }}">{{ news.category.title }}</a>
+          </div>
+        </div>
+
+        <!-- Rating -->
+        <div class="card my-4">
+          <h6 class="card-header">Rate this Article</h6>
+          <div class="card-body">
+            <form method="post">
+              {% comment %}action="/detail/{{ news.id }}"{% endcomment %}
+              {% csrf_token %}
+              <div class="form-group row">
+                <label class="col-md-2">Rating<span class="text-danger">*</span></label>
+                <div class="col-md-10">
+                  <select name="rating" class="form-control">
+                    <option value="1">1 - Poor</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="3">3 - Average</option>
+                    <option value="4">4 - Good</option>
+                    <option value="5">5 - Excellent</option>
+                  </select>
+                </div>
+              </div>
+              <input type="submit" class="btn btn-primary" value="Submit Rating" />
+            </form>
+          </div>
+        </div>
+
+        <!-- Previous Ratings -->
+        <div class="card my-4">
+          <h6 class="card-header">Previous Ratings</h6>
+          <div class="card-body">
+            {% for rating in ratings %}
+              <blockquote class="blockquote text-right">
+                <p class="mb-0">Rating: {{ rating.rating }}</p>
+              </blockquote>
+              <hr />
+              {% empty %}
+              <p>No ratings yet.</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <!-- Related News -->
+      <div class="col-md-4">
+        <h3 class="mb-3 border-bottom pb-1">From this Category</h3>
+        <!-- Category Box -->
+        {% for related_news_item in related_news %}
+          <div class="card mb-3 shadow">
+            <img src="/media/{{ related_news_item.image }}" class="card-img-top" alt="{{ related_news_item.title }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ related_news_item.Headline }}</h5>
+              <hr />
+              <p class="card-text">
+                <a href="/detail/{{ related_news_item.id }}" class="btn btn-sm btn-primary">Details</a>
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+{% endblock %}

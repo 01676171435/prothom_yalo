@@ -1,0 +1,28 @@
+{% extends 'base1.html' %}
+{% block content %}
+  <main class="container mt-3 mb-5">
+    {% for category, articles in top_articles_by_category.items %}
+      <!-- Category Wise News -->
+      <h3 class="border-bottom pb-1">{{ category.name }} <a href="/category/{{ category.id }}" class="float-right btn btn-sm btn-dark">Click Here to show all news of this category</a></h3>
+      <div class="row my-4">
+        {% for article in articles %}
+          <!-- News box -->
+          <div class="col-md-3">
+            <div class="card mb-3 shadow">
+              {% comment %} <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.Headline }}" /> {% endcomment %}
+              <div class="card-body">
+                <h3 class="border-bottom pb-1">{{ article.Headline }}</h3>
+                <h5 class="card-title">{{ article.Body|slice:':50' }}</h5>
+                <p class="card-text">Rating: {{ article.avg_rating }}</p>
+                <hr />
+                <p class="card-text">
+                  <a href="{% url 'detail' article.id %}" class="btn btn-sm btn-primary">Datails</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </main>
+{% endblock %}

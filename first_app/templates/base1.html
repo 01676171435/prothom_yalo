@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bs4/bootstrap.min.css' %}" />
+    <!-- Main Jquery -->
+    <script type="text/javascript" src="{% static 'vendor/jquery.min.js' %}"></script>
+    <!-- Bootstrap Js -->
+    <script type="text/javascript" src="{% static '/vendor/bs4/bootstrap.min.js' %}"></script>
+  </head>
+  <body>
+    <!-- Top News -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <div class="container">
+        <a class="navbar-brand" href="/">Newspaper</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <a class="nav-link text-white" href="{% url 'all-category' %}">All Categories</a>
+          <a class="nav-link text-white" href="{% url 'registration' %}">Registration</a>
+          <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+    <hr />
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#" class="btn btn-sm btn-primary">Back to top</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

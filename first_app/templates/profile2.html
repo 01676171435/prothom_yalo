@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      {% block title %}
+        Home Page
+      {% endblock %}
+    </title>
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bs4/bootstrap.min.css' %}" />
+    <!-- Main Jquery -->
+    <script type="text/javascript" src="{% static 'vendor/jquery.min.js' %}"></script>
+    <!-- Bootstrap Js -->
+    <script type="text/javascript" src="{% static '/vendor/bs4/bootstrap.min.js' %}"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <div class="container">
+        <a class="navbar-brand" href="/">Newspaper</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav"></div>
+      </div>
+    </nav>
+
+    <main class="container mt-3 mb-5">
+      <h3 class="border-bottom pb-1 my-4">Login Successfully Here All News For modification</h3>
+      <!-- News Box -->
+      {% for news in all_news %}
+        <div class="card mb-4 shadow">
+          <div class="row no-gutters">
+            <div class="col-md-3">
+              <img src="/media/{{ news.image }}" class="card-img-top" alt="{{ news.Headline }}" />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ news.Headline }}</h5>
+                <p class="card-text">{{ news.Body }}</p>
+                <p class="card-text">
+                  <a href="/create/" class="btn btn-sm btn-primary">Create</a>
+                  <a href="/edit/{{ news.id }}" class="btn btn-sm btn-primary">Edit</a>
+                  <a href="/delete/{{ news.id }}" class="btn btn-sm btn-primary">Delete</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </main>
+
+    <hr />
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>
+          Fast News is example of <a href="https://projectsplaza.com/">Django Projects</a>, but please download and customize it for yourself!
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
